@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Venus Technologies | Uganda | Elite Digital Solutions</title>
+  <!-- Google Fonts + Tailwind + Font Awesome + Devicon + Chart.js -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #05050A;
+      color: #F0F2F5;
+      overflow-x: hidden;
+    }
+    .glass-card {
+      background: rgba(10, 20, 30, 0.75);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      border-radius: 2rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 0 0.5px rgba(0, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    .glass-card:hover {
+      border-color: rgba(0, 255, 255, 0.6);
+      box-shadow: 0 20px 40px -12px rgba(0, 200, 255, 0.3), 0 0 8px rgba(0, 212, 255, 0.6);
+    }
+    .neon-glow {
+      text-shadow: 0 0 8px #00ccff, 0 0 20px #8a2be2;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #0A4B8C, #3B0C6E);
+      border: 1px solid rgba(0, 212, 255, 0.7);
+      box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+      color: white;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.3), transparent);
+      transition: left 0.5s ease;
+    }
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 212, 255, 0.5), 0 0 28px #00ccff80;
+      border-color: #00d4ff;
+      background: linear-gradient(135deg, #0D5BA0, #4A1B7D);
+    }
+    .btn-outline-neon {
+      border: 2px solid #00ccff;
+      background: transparent;
+      box-shadow: 0 0 8px rgba(0, 204, 255, 0.3), inset 0 0 0 rgba(0, 204, 255, 0.05);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      color: #00d4ff;
+      font-weight: 600;
+    }
+    .btn-outline-neon:hover {
+      background: rgba(0, 204, 255, 0.15);
+      box-shadow: 0 0 22px #00ccff;
+      border-color: #00e6ff;
+      transform: translateY(-3px);
+      color: #ffffff;
+    }
+    .service-card {
+      background: rgba(12, 18, 28, 0.7);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-radius: 2rem;
+      border-bottom: 2px solid #00f0ff;
+      transition: transform 0.2s ease, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 35px -12px #00a6ff40, 0 0 0 1px #a855f7;
+    }
+    .floating-element {
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(0deg);}
+      50% { transform: translateY(-15px) rotate(2deg);}
+      100% { transform: translateY(0px) rotate(0deg);}
+    }
+    .glow-line {
+      background: linear-gradient(90deg, transparent, #00f2ff, #b026ff, transparent);
+      height: 2px;
+      width: 80%;
+    }
+    .tech-icon {
+      filter: drop-shadow(0 0 8px cyan);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .tech-icon:hover {
+      filter: drop-shadow(0 0 15px #b026ff);
+      transform: scale(1.08);
+    }
+    .stats-number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff, #00e0ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
+    }
+    .scroll-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .contact-input {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 1.5rem;
+      padding: 0.8rem 1.2rem;
+      color: white;
+      transition: all 0.2s;
+    }
+    .contact-input:focus {
+      outline: none;
+      border-color: #00f2ff;
+      box-shadow: 0 0 12px rgba(0, 242, 255, 0.5);
+    }
+    .floating-wa {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 100;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      width: 56px;
+      height: 56px;
+      font-size: 28px;
+    }
+    .floating-wa:hover {
+      transform: scale(1.12);
+      box-shadow: 0 0 35px #25D366;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 96px;
+      right: 28px;
+      background: linear-gradient(135deg, #0A4B8C, #3B0C6E);
+      border: 1px solid rgba(0, 212, 255, 0.7);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 99;
+    }
+    .back-to-top.show {
+      display: flex;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 300;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
+      animation: fadeIn 0.3s ease;
+    }
+    .modal.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: rgba(10, 20, 30, 0.95);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: rgba(0, 0, 0, 0.9);
+      border: 1px solid rgba(0, 212, 255, 0.6);
+      color: #00d4ff;
+      padding: 1rem 1.5rem;
+      border-radius: 0.75rem;
+      z-index: 200;
+      animation: slideInUp 0.3s ease;
+    }
+    .toast.success {
+      border-color: #25d366;
+      background: rgba(37, 211, 102, 0.12);
+      color: #c8ffc8;
+    }
+    .toast.info {
+      border-color: #00b8ff;
+      background: rgba(0, 184, 255, 0.12);
+      color: #e0f7ff;
+    }
+    @keyframes slideInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* --- IMPROVED MOBILE MENU STYLES --- */
+    .hamburger-icon-btn {
+      background: rgba(0, 20, 40, 0.9);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid #00ccff;
+      box-shadow: 0 0 12px rgba(0, 204, 255, 0.5);
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: #00f2ff;
+      font-size: 1.6rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .hamburger-icon-btn:hover {
+      transform: scale(1.05);
+      background: rgba(0, 100, 150, 0.6);
+      box-shadow: 0 0 20px #00ccff;
+    }
+    .hamburger-icon-btn:active {
+      transform: scale(0.95);
+    }
+    @media (max-width: 640px) {
+      .hamburger-icon-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 1.4rem;
+      }
+    }
+    .mobile-menu-panel {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      background: rgba(8, 16, 24, 0.95);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 1.5rem;
+      margin-top: 1rem;
+    }
+    .hero-chart-canvas {
+      max-height: 200px;
+      width: 100%;
+    }
+    .menu-collapsed {
+      max-height: 0;
+      opacity: 0;
+      visibility: hidden;
+      overflow-y: auto;
+    }
+    .mobile-nav-link {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #e2e8f0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.2s;
+    }
+    .mobile-nav-link:hover {
+      color: #00f2ff;
+      background: rgba(0, 255, 255, 0.1);
+    }
+    @media (max-width: 480px) {
+      .mobile-nav-link {
+        padding: 0.9rem 0;
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-dark-base overflow-x-hidden">
+
+  <!-- Animated background glow -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="absolute top-[15%] left-[5%] w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-[100px] opacity-20 animate-pulse"></div>
+    <div class="absolute bottom-[20%] right-[5%] w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-[110px] opacity-25 animate-pulse"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-xl border-b border-white/10 py-3 px-5 md:px-10">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="scrollToHome()">
+        <div class="logo-mark w-10 h-10 bg-gradient-to-br from-cyan-900/50 to-purple-900/50 rounded-xl flex items-center justify-center shadow-md"><i class="fas fa-cube text-cyan-400 text-xl"></i></div>
+        <div class="flex items-baseline gap-1">
+          <span class="text-2xl md:text-4xl font-extrabold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent neon-glow">VENUS</span>
+          <span class="text-xl md:text-2xl font-bold tracking-tight bg-gradient-to-r from-white via-cyan-200 to-purple-300 bg-clip-text text-transparent">TECHNOLOGIES</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <button type="button" class="btn-primary px-4 py-2 rounded-full text-xs md:text-sm font-semibold hidden sm:inline-flex" onclick="openLaunchModal()"><i class="fas fa-rocket mr-1"></i>Launch</button>
+        <button type="button" id="hamburgerBtn" class="hamburger-icon-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenuPanel">
+          <i id="hamburgerIcon" class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    <div id="mobileMenuPanel" class="mobile-menu-panel menu-collapsed" aria-hidden="true">
+      <div class="flex flex-col py-3 px-2">
+        <a href="#home" class="mobile-nav-link">Home</a>
+        <a href="#about" class="mobile-nav-link">About</a>
+        <a href="#services" class="mobile-nav-link">Services</a>
+        <a href="#portfolio" class="mobile-nav-link">Portfolio</a>
+        <a href="#team" class="mobile-nav-link">Team</a>
+        <a href="#contact" class="mobile-nav-link">Contact</a>
+        <div class="flex justify-center mt-2 mb-3">
+          <button type="button" id="mobileLaunchBtn" class="btn-primary w-11/12 py-3 rounded-full font-semibold text-center"><i class="fas fa-rocket mr-2"></i>Launch project</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="relative z-10 pt-24">
+    <!-- Hero Section -->
+    <section id="home" class="relative px-6 md:px-12 max-w-7xl mx-auto py-12 md:py-20">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6 scroll-reveal">
+          <div class="inline-flex items-center gap-2 bg-white/5 rounded-full px-4 py-1 border border-cyan-500/30">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+            <span class="text-xs uppercase tracking-wider">Where Vision Meets Technology</span>
+          </div>
+          <h1 class="text-5xl md:text-7xl font-extrabold leading-tight">Transforming <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">Businesses With Smart Digital Solutions</span> from Kampala</h1>
+          <p class="text-lg text-gray-300">Venus Technologies builds modern futuristic websites, and digital experiences that help businesses thrive.</p>
+          <div class="flex flex-wrap gap-5">
+            <button type="button" class="btn-primary px-8 py-3 rounded-full font-semibold flex items-center gap-2" onclick="exploreSolutions()"><i class="fas fa-chart-line"></i> Explore solutions</button>
+            <button type="button" class="btn-outline-neon px-8 py-3 rounded-full font-semibold flex items-center gap-2" onclick="viewCaseStudies()"><i class="fas fa-play-circle"></i> Case studies</button>
+          </div>
+        </div>
+        <div class="relative scroll-reveal">
+          <div class="hero-dashboard p-4 rounded-2xl border border-white/10 floating-element bg-black/30 backdrop-blur-sm">
+            <div class="bg-black/40 rounded-xl p-3"><div class="flex justify-between text-xs text-cyan-300"><span>Analytics Engine</span><i class="fas fa-waveform"></i></div><canvas id="heroChart" class="hero-chart-canvas" width="400" height="200"></canvas><div class="flex justify-between mt-2 text-white/70 text-[10px]"><span>+124% growth</span><span>real-time</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section: Mission & Vision side-by-side -->
+    <section id="about" class="px-6 md:px-12 max-w-7xl mx-auto py-20">
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+        <div class="space-y-6 scroll-reveal">
+          <h2 class="text-4xl font-bold"><span class="text-cyan-400">Mission & Vision</span> — shaping tomorrow</h2>
+          <p class="text-gray-300 leading-relaxed">We fuse cutting-edge engineering with African ingenuity. Venus TECH delivers elite software infrastructure that empowers businesses across Uganda and global markets.</p>
+          <div class="grid grid-cols-2 gap-6 mt-6">
+            <div class="glass-card p-5 text-center"><div class="stats-number" data-target="12">0+</div><p class="text-xs">Projects delivered</p></div>
+            <div class="glass-card p-5 text-center"><div class="stats-number" data-target="48">0+</div><p class="text-xs">Enterprise partners</p></div>
+            <div class="glass-card p-5 text-center"><div class="stats-number" data-target="12">0+</div><p class="text-xs">Technology patterns</p></div>
+            <div class="glass-card p-5 text-center"><div class="stats-number" data-target="100">0%</div><p class="text-xs">Client retention</p></div>
+          </div>
+        </div>
+        <div class="scroll-reveal">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
+            <div class="glass-card p-6 rounded-2xl flex flex-col items-start gap-3 transition-all duration-300 hover:shadow-2xl">
+              <div class="bg-cyan-500/20 p-3 rounded-full"><i class="fas fa-rocket text-3xl text-cyan-400"></i></div>
+              <h3 class="text-2xl font-bold text-cyan-400">Our Mission</h3>
+              <p class="text-gray-200 leading-relaxed text-sm">To deliver world-class webs, cloud solutions, IT maintenance & support, software & training with precision, reliability, and creativity.</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl flex flex-col items-start gap-3 transition-all duration-300 hover:shadow-2xl">
+              <div class="bg-purple-500/20 p-3 rounded-full"><i class="fas fa-eye text-3xl text-purple-400"></i></div>
+              <h3 class="text-2xl font-bold text-purple-400">Our Vision</h3>
+              <p class="text-gray-200 leading-relaxed text-sm">To be the most trusted technology partner for modern businesses, innovations, institutions and organizations globally.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="px-6 md:px-12 max-w-7xl mx-auto py-20">
+      <div class="text-center mb-12 scroll-reveal"><h2 class="text-4xl md:text-5xl font-bold"><span class="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Core Solutions</span></h2><div class="glow-line mx-auto mt-4"></div></div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="service-card p-6 text-center space-y-3 scroll-reveal" onclick="openServiceModal('Website Design & Development', 'Modern, responsive high-performance websites with futuristic UX/UI.', ['React', 'Tailwind', 'Node.js'])"><i class="fas fa-code text-5xl text-cyan-400"></i><h3 class="text-xl font-semibold">Website Design & Development</h3><p class="text-gray-300 text-sm">Modern, responsive, and high-performance websites.</p></div>
+        <div class="service-card p-6 text-center space-y-3 scroll-reveal" onclick="openServiceModal('Training & Education', 'Comprehensive training programs for institutions and individuals.', ['Laravel', 'MongoDB', 'Vue'])"><i class="fas fa-chalkboard-teacher text-5xl text-purple-400"></i><h3 class="text-xl font-semibold">Training & Education</h3><p class="text-gray-300 text-sm">Comprehensive training solutions.</p></div>
+        <div class="service-card p-6 text-center space-y-3 scroll-reveal" onclick="openServiceModal('Computer Support', '24/7 enterprise IT support, maintenance & training services.', ['Python', 'Docker', 'Cloud'])"><i class="fas fa-laptop-code text-5xl text-cyan-400"></i><h3 class="text-xl font-semibold">Computer Support</h3><p class="text-gray-300 text-sm">24/7 enterprise IT support & maintenance.</p></div>
+        <div class="service-card p-6 text-center space-y-3 scroll-reveal" onclick="openServiceModal('Cloud & Hosting Solutions', 'Secure online infrastructure for modern businesses.', ['AWS', 'Firebase', 'Azure'])"><i class="fas fa-cloud text-5xl text-purple-300"></i><h3 class="text-xl font-semibold">Cloud & Hosting Solutions</h3><p class="text-gray-300 text-sm">Secure online infrastructure.</p></div>
+      </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="px-6 md:px-12 max-w-7xl mx-auto py-20">
+      <div class="mb-12 scroll-reveal"><h2 class="text-4xl font-bold"><span class="text-cyan-400">Digital masterpieces</span> — case studies</h2></div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+        <div class="glass-card rounded-2xl overflow-hidden cursor-pointer scroll-reveal" onclick="openPortfolioModal('Restaurant ordering platform', 'Digital menu, Online ordering, Admin dashboards & notifications.', ['React', 'MongoDB', 'Node.js'], 'Restaurant Platform')"><div class="h-44 bg-gradient-to-br from-cyan-900/50 to-purple-900/50 flex items-center justify-center"><i class="fas fa-chart-line text-6xl text-cyan-300/80"></i></div><div class="p-5"><h3 class="text-xl font-semibold">Restaurant Ordering Platform</h3><p class="text-sm text-gray-300">A modern platform for restaurants to manage orders efficiently.</p></div></div>
+        <div class="glass-card rounded-2xl overflow-hidden scroll-reveal" onclick="openPortfolioModal('Hotel Booking System', 'Room listing, online booking, category filtering.', ['Node.js', 'Firebase', 'React'], 'Hotel Management')"><div class="h-44 bg-gradient-to-br from-indigo-800/60 to-cyan-800/40 flex items-center justify-center"><i class="fas fa-building-user text-6xl text-purple-300"></i></div><div class="p-5"><h3 class="text-xl font-semibold">Hotel Booking System</h3><p class="text-sm text-gray-300">Modern hotel booking platform with real-time availability.</p></div></div>
+        <div class="glass-card rounded-2xl overflow-hidden scroll-reveal" onclick="openPortfolioModal('Kenzy Dry Cleaning System', 'Pickup/delivery scheduling, pricing calculator, SMS/email alerts.', ['React', 'Firebase', 'Node.js'], 'Laundry Service')"><div class="h-44 bg-gradient-to-br from-cyan-700/50 to-black/60 flex items-center justify-center"><i class="fas fa-chalkboard-user text-6xl text-purple-300"></i></div><div class="p-5"><h3 class="text-xl font-semibold">Kenzy Dry Cleaning System</h3><p class="text-sm text-gray-300">Digital platform for dry cleaning order & delivery management.</p></div></div>
+      </div>
+    </section>
+
+    <!-- TEAM SECTION -->
+    <section id="team" class="px-6 md:px-12 max-w-7xl mx-auto py-20">
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+        <div class="scroll-reveal space-y-6">
+          <h2 class="text-4xl font-bold"><span class="text-cyan-400">Elite Engineers</span><br>Future-forward collective</h2>
+          <p class="text-gray-300 leading-relaxed">Venus Technologies is a future-forward collective powered by elite engineers who blend creativity, precision, and innovation to build digital solutions that actually move businesses forward.</p>
+        </div>
+        <div class="grid grid-cols-2 gap-5 scroll-reveal">
+          <div class="glass-card p-4 text-center cursor-pointer transition hover:scale-105"><div class="w-28 h-28 rounded-full mx-auto flex items-center justify-center bg-gradient-to-br from-cyan-500/30 to-purple-500/30 text-5xl text-cyan-400 border-2 border-cyan-400 shadow-lg"><i class="fas fa-drafting-compass"></i></div><h3 class="mt-3 font-bold text-white">Mpagi Wiliam</h3><p class="text-xs text-cyan-300 font-medium">Lead Architect</p></div>
+          <div class="glass-card p-4 text-center cursor-pointer transition hover:scale-105"><div class="w-28 h-28 rounded-full mx-auto flex items-center justify-center bg-gradient-to-br from-cyan-500/30 to-purple-500/30 text-5xl text-purple-400 border-2 border-purple-400 shadow-lg"><i class="fas fa-brain"></i></div><h3 class="mt-3 font-bold text-white">Kakonge Godfrey</h3><p class="text-xs text-purple-300 font-medium">AI/ML Director</p></div>
+          <div class="glass-card p-4 text-center cursor-pointer transition hover:scale-105"><div class="w-28 h-28 rounded-full mx-auto flex items-center justify-center bg-gradient-to-br from-cyan-500/30 to-purple-500/30 text-5xl text-cyan-400 border-2 border-cyan-400 shadow-lg"><i class="fas fa-code"></i></div><h3 class="mt-3 font-bold text-white">Oboli John</h3><p class="text-xs text-cyan-300 font-medium">Fullstack Lead</p></div>
+          <div class="glass-card p-4 text-center cursor-pointer transition hover:scale-105"><div class="w-28 h-28 rounded-full mx-auto flex items-center justify-center bg-gradient-to-br from-cyan-500/30 to-purple-500/30 text-5xl text-purple-300 border-2 border-cyan-400 shadow-lg"><i class="fas fa-paintbrush"></i></div><h3 class="mt-3 font-bold text-white">Cissy Namugenyi</h3><p class="text-xs text-cyan-300 font-medium">UX Futurist</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech stack -->
+    <section class="px-6 md:px-12 max-w-7xl mx-auto py-20"><div class="text-center mb-10 scroll-reveal"><h2 class="text-3xl font-bold">Powered by <span class="text-cyan-400">bleeding‑edge</span> stack</h2><div class="w-24 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto mt-3"></div></div><div class="flex flex-wrap justify-center gap-10 items-center scroll-reveal"><div class="flex flex-col items-center gap-2 tech-icon" onclick="showToast('React - Building interactive UIs', 'info')"><i class="devicon-react-original colored text-6xl"></i><span class="text-sm">React</span></div><div class="flex flex-col items-center gap-2 tech-icon" onclick="showToast('Next.js - Full-stack framework', 'info')"><i class="devicon-nextjs-original text-6xl text-white"></i><span class="text-sm">Next.js</span></div><div class="flex flex-col items-center gap-2 tech-icon" onclick="showToast('Node.js - Server-side runtime', 'info')"><i class="devicon-nodejs-plain colored text-6xl"></i><span class="text-sm">Node.js</span></div><div class="flex flex-col items-center gap-2 tech-icon" onclick="showToast('Laravel - PHP framework', 'info')"><i class="devicon-laravel-plain colored text-6xl"></i><span class="text-sm">Laravel</span></div><div class="flex flex-col items-center gap-2 tech-icon" onclick="showToast('Firebase - Backend as a service', 'info')"><i class="devicon-firebase-plain colored text-6xl"></i><span class="text-sm">Firebase</span></div></div></section>
+
+    <!-- Testimonials -->
+    <section class="px-6 md:px-12 max-w-7xl mx-auto py-20"><div class="text-center scroll-reveal"><h2 class="text-4xl font-bold">What <span class="text-purple-400">Clients</span> say</h2></div><div class="grid md:grid-cols-3 gap-8 mt-12"><div class="glass-card p-6 rounded-2xl scroll-reveal"><div class="flex text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="italic">"Venus Technologies transformed our online presence completely."</p><div class="mt-4"><h4 class="font-semibold">Sarah Mutesi</h4><p class="text-xs text-gray-400">Business Owner</p></div></div><div class="glass-card p-6 rounded-2xl scroll-reveal"><div class="flex text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="italic">"The hotel website looks premium and works perfectly on mobile."</p><div class="mt-4"><h4 class="font-semibold">Daniel Kakonge</h4><p class="text-xs text-gray-400">Hotel Operations</p></div></div><div class="glass-card p-6 rounded-2xl scroll-reveal"><div class="flex text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><p class="italic">"What impressed us most was the creativity and detail."</p><div class="mt-4"><h4 class="font-semibold">Irene Nakyanzi</h4><p class="text-xs text-gray-400">Startup Founder</p></div></div></div></section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="px-6 md:px-12 max-w-7xl mx-auto py-20 scroll-mt-24"><div class="text-center mb-12 scroll-reveal"><h2 class="text-4xl md:text-5xl font-bold"><span class="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Get in touch</span></h2><div class="glow-line mx-auto mt-4"></div></div><div class="grid lg:grid-cols-2 gap-10"><div class="glass-card p-6 md:p-8 rounded-3xl scroll-reveal"><h3 class="text-2xl font-semibold mb-4 flex items-center gap-2"><i class="fas fa-rocket text-cyan-400"></i> Start your next digital launch</h3><p class="text-gray-300 leading-relaxed mb-6">Tell us about your project, and we'll craft a custom digital solution that helps your business grow. Reach out via email or WhatsApp to get started.</p><div class="grid gap-4">
+          <a href="https://wa.me/256789722263?text=Hello%20Venus%20TECH,%20I%20would%20like%20to%20discuss%20a%20new%20project." target="_blank" rel="noopener noreferrer" class="btn-primary w-full py-3 rounded-full inline-flex items-center justify-center gap-2"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+          <a href="mailto:venustechnologies23@gmail.com?subject=Project%20Inquiry%20for%20Venus%20Technologies" class="btn-outline-neon w-full py-3 rounded-full inline-flex items-center justify-center gap-2"><i class="fas fa-envelope"></i> Email us your brief</a>
+        </div><div class="mt-8 bg-white/5 p-5 rounded-3xl border border-white/10"><h4 class="font-semibold text-white mb-3">Quick brief checklist</h4><ul class="list-disc list-inside text-gray-300 text-sm space-y-2"><li>Project goal</li><li>Target audience</li><li>Desired launch timeline</li></ul></div></div><div class="space-y-6 scroll-reveal"><div class="glass-card p-6 rounded-2xl flex flex-col gap-4"><div class="flex items-start gap-4"><div class="bg-cyan-500/20 p-3 rounded-full"><i class="fas fa-map-marker-alt text-cyan-400 text-xl"></i></div><div><h4 class="font-bold">Innovation Hub</h4><p>Kampala, Uganda</p></div></div><div class="flex items-start gap-4"><div class="bg-purple-500/20 p-3 rounded-full"><i class="fas fa-envelope text-purple-400 text-xl"></i></div><div><h4 class="font-bold">Email</h4><a href="mailto:hello@venustech.com" class="text-cyan-300">venustechnologies23@gmail.com</a></div></div><div class="flex items-start gap-4"><div class="bg-cyan-500/20 p-3 rounded-full"><i class="fas fa-phone-alt text-cyan-400 text-xl"></i></div><div><h4 class="font-bold">Phone / WhatsApp</h4><a href="tel:+256789722263" class="text-cyan-300">+256 789 722 263</a></div></div></div><div class="glass-card p-6 rounded-2xl text-center"><button type="button" class="btn-primary w-full py-3 rounded-full" onclick="openWhatsApp()">Book a Free Consultation →</button></div></div></div></section>
+
+    <!-- Footer: dynamic year update -->
+    <footer class="relative border-t border-white/10 bg-black/30 py-8 px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <p>© <span id="currentYear"></span> VENUS TECHNOLOGIES · Kampala, Uganda · Where code meets the future</p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Modals & floating buttons -->
+  <div id="launchModal" class="modal" onclick="closeLaunchModal(event)"><div class="modal-content" onclick="event.stopPropagation()"><span class="modal-close float-right text-2xl cursor-pointer" onclick="closeLaunchModal()">&times;</span><h2 class="text-3xl font-bold mb-4 text-cyan-400">Launch Your Project</h2><p class="mb-6">Ready to bring your vision to life? Let's start with Venus TECH.</p><button type="button" class="btn-primary w-full py-3 rounded-full" onclick="launchProject()"><i class="fab fa-whatsapp"></i> Get Started Today</button></div></div>
+  <div id="serviceModal" class="modal" onclick="closseServiceModal(event)"><div class="modal-content"><span class="modal-close float-right text-2xl cursor-pointer" onclick="closeServiceModal()">&times;</span><h2 id="serviceTitle" class="text-2xl font-bold text-cyan-400"></h2><p id="serviceDescription" class="my-4 text-gray-300"></p><div id="serviceTechs" class="flex flex-wrap gap-2 my-3"></div><button type="button" class="btn-primary w-full py-2 rounded-full" onclick="openWhatsApp()">Contact for this service</button></div></div>
+  <div id="portfolioModal" class="modal" onclick="closePortfolioModal(event)"><div class="modal-content"><span class="modal-close float-right text-2xl cursor-pointer" onclick="closePortfolioModal()">&times;</span><h2 id="portfolioTitle" class="text-2xl font-bold text-cyan-400"></h2><p id="portfolioType" class="text-purple-400 text-sm"></p><p id="portfolioDescription" class="my-3 text-gray-300"></p><div id="portfolioTechs" class="flex flex-wrap gap-2"></div><button type="button" class="btn-primary w-full mt-4 py-2 rounded-full" onclick="openWhatsApp()">Inquire about project</button></div></div>
+
+  <a href="https://wa.me/256789722263?text=Hello%20Venus%20TECH" target="_blank" rel="noopener noreferrer" class="floating-wa" aria-label="Contact Venus Technologies on WhatsApp"><i class="fab fa-whatsapp text-white" aria-hidden="true"></i></a>
+  <button type="button" class="back-to-top" id="backToTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+
+  <script src="script.js"></script>
+  <script>
+    // Set current year dynamically in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Hero chart
+    const ctx = document.getElementById('heroChart')?.getContext('2d');
+    if(ctx) new Chart(ctx, { type: 'line', data: { labels: ['Jul','Aug','Sep','Oct','Nov','Dec','Jan'], datasets: [{ label: 'Platform activity', data: [12,19,28,45,62,89,101], borderColor: '#00f2ff', backgroundColor: 'rgba(0,242,255,0.1)', tension: 0.3, fill: true }] }, options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { labels: { color: '#ccc' } } }, scales: { y: { grid: { color: '#ffffff20' }, ticks: { color: '#aaa' } }, x: { ticks: { color: '#ccc' } } } } });
+    
+    // Stats counter
+    const counters = document.querySelectorAll('.stats-number');
+    const observerStats = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting && !entry.target.hasAttribute('data-animated')) { const el = entry.target; el.setAttribute('data-animated','true'); const target = parseInt(el.getAttribute('data-target')); let count=0; const upd=()=>{ const inc=target/45; if(count<target){ count+=inc; el.innerText=Math.floor(count)+(el.innerText.includes('%')?'%':'+'); requestAnimationFrame(upd); } else el.innerText=target+(el.innerText.includes('%')?'%':'+'); }; upd(); } }); }, { threshold:0.4 });
+    counters.forEach(c=>observerStats.observe(c));
+    
+    // Scroll reveal
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+    const revealObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.2 });
+    revealElements.forEach(el => revealObserver.observe(el));
+    
+    // Hamburger menu logic
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobilePanel = document.getElementById('mobileMenuPanel');
+    const hamburgerIcon = document.getElementById('hamburgerIcon');
+    let isMenuOpen = false;
+    
+    function closeMobileMenu() {
+      if (!isMenuOpen) return;
+      isMenuOpen = false;
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+      mobilePanel.style.maxHeight = '0';
+      mobilePanel.style.opacity = '0';
+      mobilePanel.style.visibility = 'hidden';
+      hamburgerIcon.classList.remove('fa-times');
+      hamburgerIcon.classList.add('fa-bars');
+    }
+    
+    function openMobileMenu() {
+      if (isMenuOpen) return;
+      isMenuOpen = true;
+      hamburgerBtn.setAttribute('aria-expanded', 'true');
+      mobilePanel.style.maxHeight = '70vh';
+      mobilePanel.style.opacity = '1';
+      mobilePanel.style.visibility = 'visible';
+      hamburgerIcon.classList.remove('fa-bars');
+      hamburgerIcon.classList.add('fa-times');
+    }
+    
+    function toggleMobileMenu() {
+      if (isMenuOpen) closeMobileMenu();
+      else openMobileMenu();
+    }
+    
+    hamburgerBtn.addEventListener('click', toggleMobileMenu);
+    
+    const mobileLinks = document.querySelectorAll('#mobileMenuPanel .mobile-nav-link');
+    const mobileLaunchBtn = document.getElementById('mobileLaunchBtn');
+    
+    function handleMobileNavClick(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      if (targetId && targetId !== '#') {
+        document.querySelector(targetId)?.scrollIntoView({ behavior: 'smooth' });
+      }
+      closeMobileMenu();
+    }
+    
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', handleMobileNavClick);
+    });
+    
+    if (mobileLaunchBtn) {
+      mobileLaunchBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeMobileMenu();
+        openLaunchModal();
+      });
+    }
+    
+    // Helper functions
+    function showToast(msg, type) { const t=document.createElement('div'); t.className=`toast ${type}`; t.innerText=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),3000); }
+    function openWhatsApp(){ window.open('https://wa.me/256789722263?text=Hello%20Venus%20TECH','_blank'); }
+    function launchProject(){ showToast('🚀 Thank you! Our team will contact you shortly.','success'); closeLaunchModal(); openWhatsApp(); }
+    function exploreSolutions(){ document.querySelector('#services').scrollIntoView({behavior:'smooth'}); closeMobileMenu(); }
+    function viewCaseStudies(){ document.querySelector('#portfolio').scrollIntoView({behavior:'smooth'}); closeMobileMenu(); }
+    function scrollToHome(){ document.querySelector('#home').scrollIntoView({behavior:'smooth'}); closeMobileMenu(); }
+    function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); closeMobileMenu(); }
+    
+    const launchModal=document.getElementById('launchModal'), serviceModal=document.getElementById('serviceModal'), portfolioModal=document.getElementById('portfolioModal');
+    function openLaunchModal(){ launchModal.classList.add('show'); } 
+    function closeLaunchModal(e){ if(!e||e.target===launchModal) launchModal.classList.remove('show'); }
+    function openServiceModal(title,desc,techs){ document.getElementById('serviceTitle').innerText=title; document.getElementById('serviceDescription').innerText=desc; document.getElementById('serviceTechs').innerHTML=techs.map(t=>`<span class="text-xs bg-cyan-500/20 px-3 py-1 rounded-full">${t}</span>`).join(''); serviceModal.classList.add('show'); }
+    function closeServiceModal(e){ if(!e||e.target===serviceModal) serviceModal.classList.remove('show'); }
+    function openPortfolioModal(title,desc,techs,type){ document.getElementById('portfolioTitle').innerText=title; document.getElementById('portfolioDescription').innerText=desc; document.getElementById('portfolioType').innerText=type; document.getElementById('portfolioTechs').innerHTML=techs.map(t=>`<span class="text-xs bg-purple-500/20 px-3 py-1 rounded-full">${t}</span>`).join(''); portfolioModal.classList.add('show'); }
+    function closePortfolioModal(e){ if(!e||e.target===portfolioModal) portfolioModal.classList.remove('show'); }
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ launchModal.classList.remove('show'); serviceModal.classList.remove('show'); portfolioModal.classList.remove('show'); } });
+    window.addEventListener('scroll',()=>{ const btn=document.getElementById('backToTop'); if(window.pageYOffset>300) btn.classList.add('show'); else btn.classList.remove('show'); });
+  </script>
+</body>
+</html>
